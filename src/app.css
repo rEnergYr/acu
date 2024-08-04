@@ -1,3 +1,6 @@
+@import url('https://fonts.cdnfonts.com/css/pp-neue-montreal');
+@import url('https://fonts.cdnfonts.com/css/assassin');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
