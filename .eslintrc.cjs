@@ -7,16 +7,15 @@ module.exports = {
   },
   "ignorePatterns": ["node_modules", ".eslintrc.cjs", "*.json", "build", ".svelte-kit", "src/app.d.ts"],
   "extends": [
+    "plugin:@typescript-eslint/recommended",
     "airbnb-base",
     "plugin:svelte/recommended",
     "plugin:prettier/recommended"
   ],
   "plugins": [
-    "@typescript-eslint",
     "prettier"
   ],
   "rules": {
-
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",

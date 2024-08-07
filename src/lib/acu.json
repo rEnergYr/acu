@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "title":"Assassin's Creed"
+  },
+  {
+    "id": 2,
+    "title":"Assassin's Creed II"
+  },
+  {
+    "id": 3,
+    "title":"Assassin's Creed III"
+  },
+  {
+    "id": 4,
+    "title":"Assassin's Creed Black Flag"
+  },
+  {
+    "id": 5,
+    "title":"Assassin's Creed Unity"
+  },
+  {
+    "id": 6,
+    "title":"Assassin's Creed Syndicate"
+  },
+  {
+    "id": 7,
+    "title":"Assassin's Creed Origins"
+  },
+
+  {
+    "id": 8,
+    "title":"Assassin's Creed Odyssey"
+  },
+  {
+    "id": 9,
+    "title":"Assassin's Creed Valhalla"
+  }
+]

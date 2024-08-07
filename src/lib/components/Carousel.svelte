@@ -1,39 +1,75 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { fade } from 'svelte/transition'
+  import { currentAC } from '$lib/stores'
   import { gsap } from '$lib/vendors/gsap'
 
-  const tl = gsap.timeline()
-  let textBarTween: gsap.core.Tween
+  const TEXT_ANIM_DELAY_AND_DURATION_IN_SECOND = 0.4
+  const BAR_LOADER_DURATION_IN_SECOND = 8
 
-  function pause() {
-    tl.pause()
-    textBarTween.pause()
+  const barLoaderTl = gsap.timeline()
+  const textAnimTl = gsap.timeline()
+
+  function pauseAnimation() {
+    barLoaderTl.pause()
+    textAnimTl.pause()
   }
 
-  function resume() {
-    tl.resume()
-    textBarTween.resume()
+  function resumeAnimation() {
+    barLoaderTl.resume()
+    textAnimTl.resume()
+  }
+
+  function goToNext() {
+    currentAC.goToNext()
+
+    barLoaderTl.restart()
+    textAnimTl.restart()
   }
 
   onMount(() => {
-    tl.to('#bar-loader', {
-      delay: 0.4,
-      duration: 5,
-      x: 0,
-    })
+    textAnimTl.fromTo(
+      '#text, #bar',
+      {
+        x: -12,
+        opacity: 0,
+      },
+      {
+        delay: TEXT_ANIM_DELAY_AND_DURATION_IN_SECOND,
+        duration: TEXT_ANIM_DELAY_AND_DURATION_IN_SECOND,
+        x: 0,
+        opacity: 1,
+        ease: 'power4.out',
+      }
+    )
 
-    tl.to('#bar-loader', {
-      duration: 0.9,
-      xPercent: 100,
-      opacity: 0.7,
-      ease: 'power4.in',
-    })
-
-    textBarTween = gsap.to('#text, #bar', {
-      delay: 5.3,
+    textAnimTl.to('#text, #bar', {
+      delay: BAR_LOADER_DURATION_IN_SECOND - TEXT_ANIM_DELAY_AND_DURATION_IN_SECOND,
       duration: 1,
-      x: 15,
+      x: 12,
+      opacity: 0,
+      ease: 'power4.in',
+      onComplete: () => {
+        setTimeout(goToNext, 500)
+      },
+    })
+
+    barLoaderTl.fromTo(
+      '#bar-loader',
+      {
+        xPercent: -100,
+      },
+      {
+        delay: TEXT_ANIM_DELAY_AND_DURATION_IN_SECOND,
+        duration: BAR_LOADER_DURATION_IN_SECOND,
+        xPercent: 0,
+        ease: 'none',
+      }
+    )
+
+    barLoaderTl.to('#bar-loader', {
+      duration: 1,
+      xPercent: 100,
       opacity: 0,
       ease: 'power4.in',
     })
@@ -41,23 +77,28 @@
 </script>
 
 <section class="flex flex-col">
-  <div class="flex h-96 flex-col justify-center px-20 text-white" transition:fade>
+  <div class="flex h-80 flex-col justify-center px-20 text-white" transition:fade>
     <h1 class="text-7xl">Discover universe of</h1>
-
     <div class="w-fit">
-      <h1
+      <h2
         id="text"
-        class=" cursor-pointer text-7xl text-highlight duration-200 hover:text-highlight/70"
-        on:mouseenter={pause}
-        on:mouseleave={resume}
+        class="cursor-pointer text-7xl text-highlight opacity-0 duration-200 hover:text-highlight/70"
+        aria-label="Title of Assassin's Creed game"
+        on:mouseenter={pauseAnimation}
+        on:mouseleave={resumeAnimation}
       >
-        Assassin's creed II
-      </h1>
+        <span>{$currentAC.title}</span>
+      </h2>
       <div class="relative h-0.5 overflow-hidden">
-        <span id="bar" class="absolute bottom-0 left-0 h-0.5 w-full bg-highlight/50"></span>
+        <span
+          id="bar"
+          class="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-highlight/20 opacity-0"
+          aria-hidden="true"
+        ></span>
         <span
           id="bar-loader"
-          class="absolute bottom-0 left-0 h-0.5 w-full -translate-x-full bg-highlight"
+          aria-hidden="true"
+          class="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-highlight"
         ></span>
       </div>
     </div>

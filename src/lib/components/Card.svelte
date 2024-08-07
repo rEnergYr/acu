@@ -3,7 +3,7 @@
   import { fade } from 'svelte/transition'
   import { gsap } from '$lib/vendors/gsap'
 
-  let showCardContent: boolean = false
+  let showCardContent = false
 
   onMount(() => {
     gsap.to('#card', {
@@ -28,7 +28,11 @@
         <h3 class="font-assassin text-3xl font-medium text-white">Assassin'S</h3>
         <h3 class="font-assassin text-2xl font-medium text-white">Creed Universe</h3>
       </div>
-      <a href="https://www.ubisoft.com/en-en/game/assassins-creed" target="_blank">
+      <a
+        href="https://www.ubisoft.com/en-en/game/assassins-creed"
+        target="_blank"
+        aria-label="Play Now on Ubisoft"
+      >
         <button class="w-28 rounded-full bg-highlight py-2.5 text-sm font-medium hover:opacity-80">
           Play Now !
         </button>
