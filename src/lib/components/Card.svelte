@@ -10,7 +10,7 @@
       duration: 0.35,
       delay: 1,
       borderRadius: 12,
-      margin: 24,
+      margin: 20,
       onComplete: () => {
         showCardContent = true
       },
@@ -22,24 +22,39 @@
   {#if showCardContent}
     <div
       transition:fade
-      class="flex h-24 w-full items-center justify-between bg-card-secondary px-20"
+      class="flex h-32 w-full items-center justify-between bg-card-secondary px-10 lg:px-20 3xl:px-36"
     >
-      <div class=" flex flex-col items-center">
-        <h3 class="font-assassin text-3xl font-medium text-white">Assassin'S</h3>
-        <h3 class="font-assassin text-2xl font-medium text-white">Creed Universe</h3>
+      <div class="flex -translate-y-1.5 flex-col items-center">
+        <h3 class="font-assassin text-3xl font-medium text-white">Assasin's Creed</h3>
+        <h3 class="font-assassin text-3xl font-medium text-white">Universe</h3>
       </div>
       <a
         href="https://www.ubisoft.com/en-en/game/assassins-creed"
         target="_blank"
         aria-label="Play Now on Ubisoft"
+        class="-translate-y-1.5"
       >
         <button class="w-28 rounded-full bg-highlight py-2.5 text-sm font-medium hover:opacity-80">
           Play Now !
         </button>
       </a>
     </div>
-    <div class="h-full overflow-auto">
+    <div class="h-full -translate-y-3 overflow-auto rounded-2xl bg-card">
       <slot />
     </div>
   {/if}
 </div>
+
+<style>
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply mb-28 mt-3 rounded-full bg-white/10;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-white/80;
+  }
+</style>

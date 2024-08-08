@@ -7,6 +7,9 @@ export default {
       assassin: ['assassin\\$'],
     },
     extend: {
+      screens: {
+        '3xl': '2300px',
+      },
       colors: {
         'card': '#1a1a1a',
         'card-secondary': '#141414',
