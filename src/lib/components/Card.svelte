@@ -1,9 +1,30 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { fade } from 'svelte/transition'
-  import { gsap } from '$lib/vendors/gsap'
+  import { gsap, registerPlugins } from '$lib/vendors/gsap'
 
   let showCardContent = false
+  let cardContent: HTMLElement
+
+  $: if (cardContent) {
+    registerPlugins(cardContent).lenis('scroll', (l) => {
+      const velocity = Math.abs(l.velocity)
+      const max = 5
+      let y = 0
+
+      if (l.direction === 1) {
+        y -= velocity > max ? max : velocity
+      }
+
+      if (l.direction === -1) {
+        y += velocity > max ? max : velocity
+      }
+
+      gsap.to('#carousel-img img', {
+        yPercent: `+=${y}`,
+      })
+    })
+  }
 
   onMount(() => {
     gsap.to('#card', {
@@ -39,7 +60,7 @@
         </button>
       </a>
     </div>
-    <div class="h-full -translate-y-3 overflow-auto rounded-2xl bg-card">
+    <div class="h-full -translate-y-3 overflow-auto rounded-2xl bg-card" bind:this={cardContent}>
       <slot />
     </div>
   {/if}

@@ -4,6 +4,9 @@
   import { currentAC } from '$lib/stores'
   import { gsap } from '$lib/vendors/gsap'
 
+  const TEXT_ANIM_DELAY_AND_DURATION_IN_SECOND = 0.4
+  const BAR_LOADER_DURATION_IN_SECOND = 8
+
   const barLoaderTl = gsap.timeline()
   const textAnimTl = gsap.timeline()
 
@@ -25,9 +28,6 @@
   }
 
   function initTextAndBarLoaderAnimation() {
-    const TEXT_ANIM_DELAY_AND_DURATION_IN_SECOND = 0.4
-    const BAR_LOADER_DURATION_IN_SECOND = 8
-
     textAnimTl.fromTo(
       '#text, #bar',
       {
@@ -113,77 +113,78 @@
   </div>
 
   <div
-    class="pointer-events-none absolute top-24 grid size-full justify-center gap-x-14 max-sm:left-0 sm:grid-cols-3 xl:-right-[8%] xl:top-44 xl:grid-cols-6"
+    id="carousel-img"
+    class=" pointer-events-none absolute top-24 grid size-full justify-center gap-x-14 max-sm:left-0 sm:grid-cols-3 xl:-right-[8%] xl:top-44 xl:grid-cols-6"
   >
     <!-- Fist column (visible from sm) -->
-    <div class="hidden w-full max-w-60 flex-col justify-center gap-y-16 sm:flex">
+    <div class="img hidden w-full max-w-60 flex-col justify-center gap-y-16 sm:flex 3xl:max-w-80">
       <img
-        class="card-img h-[33%] translate-y-48 rounded-lg object-cover brightness-75"
+        class="h-[33%] translate-y-48 rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
     </div>
 
     <!-- Second column (visible from xl) -->
-    <div class="hidden w-full max-w-60 flex-col justify-center gap-y-16 xl:flex">
+    <div class="img hidden w-full max-w-60 flex-col justify-center gap-y-16 xl:flex 3xl:max-w-80">
       <img
-        class="card-img h-[33%] translate-y-28 rounded-lg object-cover brightness-75"
+        class="h-[33%] translate-y-28 rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
     </div>
 
     <!-- Third column (always visible) -->
-    <div class="flex w-60 flex-col justify-center sm:w-full sm:max-w-60">
+    <div id="main-img" class="flex w-60 max-w-60 flex-col justify-center sm:w-full 3xl:max-w-80">
       <img
-        class="card-img h-[33%] rounded-lg object-cover brightness-75"
+        class="h-[33%] rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
     </div>
 
     <!-- Fourth column (visible from sm) -->
-    <div class="hidden w-full max-w-60 translate-y-20 flex-col justify-center gap-y-16 sm:flex">
+    <div class="img hidden w-full max-w-60 flex-col justify-center gap-y-16 sm:flex 3xl:max-w-80">
       <img
-        class="card-img h-[33%] rounded-lg object-cover brightness-75"
+        class="h-[33%] rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
       <img
-        class="card-img h-[33%] rounded-lg object-cover brightness-75"
+        class="h-[33%] rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
     </div>
 
     <!-- Fifth column (visible from xl) -->
-    <div class="hidden w-full max-w-60 -translate-y-16 flex-col justify-center gap-y-16 xl:flex">
+    <div class="img hidden w-full max-w-60 flex-col gap-y-16 xl:flex 3xl:max-w-80">
       <img
-        class="card-img h-[33%] rounded-lg object-cover brightness-75"
+        class="h-[33%] rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
       <img
-        class="card-img h-[33%] rounded-lg object-cover brightness-75"
+        class="h-[33%] rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
     </div>
 
     <!-- Sixth column (visible from xl) -->
-    <div class="hidden w-full max-w-60 -translate-y-28 flex-col xl:flex">
+    <div class="img hidden w-full max-w-60 -translate-y-32 flex-col xl:flex 3xl:max-w-80">
       <img
-        class="card-img h-[33%] rounded-lg object-cover brightness-75"
+        class="h-[33%] rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
       <img
-        class="card-img h-[33%] translate-y-16 rounded-lg object-cover brightness-75"
+        class="h-[33%] translate-y-16 rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
       <img
-        class="card-img h-[33%] translate-y-32 rounded-lg object-cover brightness-75"
+        class="h-[33%] translate-y-32 rounded-lg object-cover brightness-75"
         src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/KYhNuXkKB70173MTMTQXc/34af253cf903c9ba84b06ed67a59fd54/ac-ii-screenshot-1.jpg"
         alt="Assassin's Creed II"
       />
